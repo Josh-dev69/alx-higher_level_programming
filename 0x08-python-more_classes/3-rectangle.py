@@ -33,10 +33,9 @@ class Rectangle:
         """ Setting the height of the Rectangle Class """
         if type(value) is not int:
             raise TypeError("height must be an integer")
-        elif value < 0:
+        if value < 0:
             raise ValueError("height must be >= 0")
-        else:
-            self.__height = value
+        self.__height = value
 
     def area(self):
         """ Returns the area of the rectangle """
@@ -53,10 +52,9 @@ class Rectangle:
         """ Returns a printable string representation of the rectangle """
         if self.__width == 0 or self.__height == 0:
             return ""
-        else:
-            rect_str = ""
-            for i in range(self.__height):
-                rect_str += "#" * self.__width
-                if i != self.__height - 1:
-                    rect_str += "\n"
-            return rect_str
+        rect_str = ""
+        for i in range(self.__height):
+            rect_str += "#" * self.__width
+            if i != self.__height - 1:
+                rect_str += "\n"
+        return rect_str
