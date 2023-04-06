@@ -27,9 +27,9 @@ class Rectangle:
         """ Function to retrieve the height """
         return self.__height
 
-    @width.setter
+    @height.setter
     def height(self, value):
-        """ Setting the height of the Rectangle Class """
+        """ Setter for the height of the Rectangle Class """
         if type(value) is not int:
             raise TypeError("height must be an integer")
         elif value < 0:
