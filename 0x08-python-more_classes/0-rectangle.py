@@ -1,10 +1,6 @@
 #!/usr/bin/python3
 
-""" This module defines an empty class called Rectangle
-    No module was imported
-"""
+""" This module defines an empty class called Rectangle"""
 class Rectangle:
-    """ This class is an empty class
-    Note: without the pass keyword, the class will raise an exception
-    """
+    """ Representing an empty Rectangle class """
     pass
