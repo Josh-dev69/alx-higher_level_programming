@@ -2,8 +2,9 @@
 
 """ This module defines the Rectangle class """
 class Rectangle:
-    """ Definining and initializing the class objects """
+    """ Representing the class objects """
     def __init__(self, width=0, height=0):
+        """ Initializing the class """
         self.width = width
         self.height = height
 
