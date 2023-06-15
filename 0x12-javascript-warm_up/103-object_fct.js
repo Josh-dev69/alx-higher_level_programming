@@ -8,8 +8,8 @@ myObject.incr function () {
   myObject.value +=1;
 };
 myObject.incr();
-console.log(myObject);#!/usr/bin/node
+console.log(myObject);
 myObject.incr();
-console.log(myObject);#!/usr/bin/node
+console.log(myObject);
 myObject.incr();
-console.log(myObject);#!/usr/bin/node
+console.log(myObject);
