@@ -1,5 +1,5 @@
 #!/usr/bin/node
-function factorialFinder(num) {
+function factorialFinder (num) {
   if (num === 0) {
     return (1);
   } else {
