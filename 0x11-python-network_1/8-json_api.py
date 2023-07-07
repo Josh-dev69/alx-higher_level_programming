@@ -7,17 +7,20 @@ Usage: ./8-json_api.py <letter>
 import sys
 import requests
 
-
 if __name__ == "__main__":
-    letter = "" if len(sys.argv) == 1 else sys.argv[1]
-    payload = {"q": letter}
-
-    r = requests.post("http://0.0.0.0:5000/search_user", data=payload)
+    if len(sys.argv) > 1:
+        arg = sys.argv[1]
+    else:
+        arg = ""
+    payload = {'q': arg}
+    url = "http://0.0.0.0:5000/search_user"
+    r = requests.post(url, data=payload)
     try:
-        response = r.json()
-        if response == {}:
+        r.raise_for_status()
+        json = r.json()
+        if len(json) == 0:
             print("No result")
         else:
-            print("[{}] {}".format(response.get("id"), response.get("name")))
-    except ValueError:
+            print("[{:d}] {}".format(json['id'], json['name']))
+    except Exception:
         print("Not a valid JSON")
