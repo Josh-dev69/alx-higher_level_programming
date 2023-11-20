@@ -3,20 +3,27 @@
     the database hbtn_0e_0_usa """
 
 import MySQLdb
-import sys
+from sys import argv
 
 if __name__ == "__main__":
     # Set up connection
     conn = MySQLdb.connect(
-            user = sys.argv[1],
-            passwd = sys.argv[2],
-            db = sys.argv[3]
+            host="localhost",
+            port=3306,
+            user=argv[1],
+            passwd=argv[2],
+            db=argv[3],
+            charset="utf8"
         )
-    cursor = conn.cursor()
+    cur = conn.cursor()
 
     query = "SELECT * FROM states ORDER BY id ASC"
-    cursor.execute(query)
+    cur.execute(query)
 
-    results = cursor.fetchall()
-    for row in results:
+    result = cur.fetchall()
+    for row in result:
         print(row)
+
+    cur.close()
+    conn.close()
+
