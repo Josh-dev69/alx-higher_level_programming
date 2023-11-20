@@ -6,7 +6,6 @@ import MySQLdb
 import sys
 
 if __name__ == "__main__":
-    # Connect to the database
     conn = MySQLdb.connect(
             host = "localhost",
             port = 3306,
@@ -16,11 +15,9 @@ if __name__ == "__main__":
         )
     cursor = conn.cursor()
 
-    # Execute the SQL Query
     query = "SELECT * FROM states"
     cursor.execute(query)
 
-    # Fetch and Display the Results
     results = cursor.fetchall()
     for row in results:
         print(row)
