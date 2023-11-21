@@ -3,8 +3,8 @@
     starting with N (upper N) from the 
     database hbtn_0e_0_usa """
 
-import MySQLdb
 import sys
+import MySQLdb
 
 if __name__ == "__main__":
     # Set up connection
@@ -22,3 +22,6 @@ if __name__ == "__main__":
     for row in results:
         if row[1][0] == 'N':
             print(row)
+    
+    cursor.close()
+    conn.close()
