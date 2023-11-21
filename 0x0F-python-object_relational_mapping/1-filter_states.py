@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ 
 A Script that lists all states with N (upper N) 
-from the database hbtn_0e_0_usa
+from the states table
 
 """
 
@@ -17,15 +17,14 @@ if __name__ == "__main__":
         db = sys.argv[3],
         charset="utf8"
     )
-    cursor = conn.cursor()
+    cur = conn.cursor()
 
-    query = "SELECT * FROM states WHERE name LIKE \
-            BINARY'N%' ORDER BY id ASC"
-    cursor.execute(query)
+    cur.execute("SELECT * FROM states WHERE name LIKE \
+            BINARY'N%' ORDER BY id ASC")
 
-    results = cursor.fetchall()
+    results = cur.fetchall()
     for row in results:
         print(row)
     
-    cursor.close()
+    cur.close()
     conn.close()
