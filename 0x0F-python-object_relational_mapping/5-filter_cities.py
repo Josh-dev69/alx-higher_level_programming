@@ -16,13 +16,19 @@ if __name__ == "__main__":
         charset="utf8"
     )
     cur = conn.cursor()
-    query = "SELECT cities.id, cities.name FROM cities \
+    query = "SELECT cities.name FROM cities \
             JOIN states ON cities.state_id = states.id \
             WHERE states.name LIKE BINARY %s \
             ORDER BY cities.id ASC"
     cur.execute(query, (argv[4], ))
     result = cur.fetchall()
-    for row in result:
-        print(row)
+    if result is not None:
+        result_strings = []
+        for row in result:
+            result_strings.append(str(row[0]))
+
+    result_string = ", ".join(result_strings)
+    print(result_string)
+
     cur.close()
     conn.close()
