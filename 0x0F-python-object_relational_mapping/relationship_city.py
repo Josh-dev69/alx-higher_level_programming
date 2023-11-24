@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 """
-    This class represent the City which work with ORM objects
+This class represent the City which work
+with ORM objects
 
 """
 
-from model_state import Base, State
+from relationship_state import Base, State
 from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
 
 
 class City(Base):
