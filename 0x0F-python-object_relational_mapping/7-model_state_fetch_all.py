@@ -16,7 +16,7 @@ if __name__ == "__main__":
     db = argv[3]
     
     # Create an SQLAlchemy engine
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
             .format(user, pwd, db), pool_pre_ping=True)
 
     # Create a configured session class
