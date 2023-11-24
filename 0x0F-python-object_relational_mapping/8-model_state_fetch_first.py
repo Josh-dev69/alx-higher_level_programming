@@ -14,18 +14,14 @@ if __name__ == "__main__":
     """
     Access the database and listing the state
     """
-    user = argv[1]
-    pwd = argv[2]
-    db = argv[3]
     engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
-        user, pwd, db), pool_pre_ping=True)
+        argv[1], argv[2], argv[3]), pool_pre_ping=True)
 
     Session = sessionmaker(bind=engine)
     session = Session()
-    
-    fetch_first = session.query(State).order_by(State.id).first()
-    if fetch_first:
-        print("{}: {}".format(fetch_first.id, fetch_first.name))
+    first_row = session.query(State).order_by(State.id).first()
+    if first_row:
+        print("{}: {}".format(first_row.id, first_row.name))
     else:
         print("Nothing")
     session.close()
