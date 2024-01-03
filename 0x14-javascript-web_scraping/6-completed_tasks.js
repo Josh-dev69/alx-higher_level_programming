@@ -7,7 +7,7 @@ const request = require('request');
 
 const apiUrl = process.argv[2];
 
-const(apiUrl, function (error, response, body) {
+request(apiUrl, function (error, response, body) {
   if (error) {
     console.error(error);
     return;
@@ -16,10 +16,8 @@ const(apiUrl, function (error, response, body) {
   if (response.statusCode === 200) {
     const tasks = JSON.parse(body);
 
-    // Create an object to store the count of completed tasks for each user
     const completedTasksByUser = {};
 
-    // Count completed tasks for each user
     tasks.forEach(task => {
       if (task.completed) {
         if (completedTasksByUser[task.userId]) {
@@ -35,3 +33,4 @@ const(apiUrl, function (error, response, body) {
     console.error(`Unexpected status code: ${response.statusCode}`);
   }
 });
+
