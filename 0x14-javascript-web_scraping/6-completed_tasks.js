@@ -4,33 +4,29 @@
  */
 
 const request = require('request');
-
-const apiUrl = process.argv[2];
-
-request(apiUrl, function (error, response, body) {
-  if (error) {
-    console.error(error);
-    return;
-  }
-
-  if (response.statusCode === 200) {
-    const tasks = JSON.parse(body);
-
-    const completedTasksByUser = {};
-
-    tasks.forEach(task => {
-      if (task.completed) {
-        if (completedTasksByUser[task.userId]) {
-          completedTasksByUser[task.userId]++;
-        } else {
-          completedTasksByUser[task.userId] = 1;
-        }
-      }
-    });
-
-    console.log(completedTasksByUser);
+const apiUrl = process.argv[2]
+request(apiUrl, function (err, _res, body) {
+  if (err) {
+    console.error(err);
   } else {
-    console.error(`Unexpected status code: ${response.statusCode}`);
+    try {
+      const completedTasksByUsers = {};
+      body = JSON.parse(body);
+
+      for (let i = 0; i < body.length; ++i) {
+        const userId = body[i].userId;
+        const completed = body[i].completed;
+
+        if (completed && !completedTasksByUsers[userId]) {
+          completedTasksByUsers[userId] = 0;
+        }
+
+        if (completed) ++completedTasksByUsers[userId];
+      }
+
+      console.log(completedTasksByUsers);
+    } catch (parseError) {
+      console.error('Error parsing JSON response:', parseError);
+    }
   }
 });
-
