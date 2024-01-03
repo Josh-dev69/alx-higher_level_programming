@@ -1,24 +1,28 @@
 #!/usr/bin/node
 /**
- * 
- * get specitfy move characters
- *
+ * Get movies with the character "Wedge Antilles" (character ID 18).
  */
 
 const request = require('request');
 
 const apiUrl = process.argv[2];
 
-request.get(apiUrl, (error, response, body) => {
+request(apiUrl, function (error, response, body) {
   if (error) {
     console.error(error);
+    return;
+  }
+
+  if (response.statusCode === 200) {
+    const films = JSON.parse(body).results;
+    // Filter movies based on the presence of the character "Wedge Antilles" (character ID 18)
+    const wedgeAntillesMovies = films.filter(movie =>
+      movie.characters.some(character =>
+        character.endsWith('/18/')
+      )
+    );
+    console.log(wedgeAntillesMovies.length);
   } else {
-    try {
-      const films = JSON.parse(body).results;
-      const wedgeAntillesMovies = films.filter(movie => movie.characters.includes('https://swapi-api.alx-tools.com/api/people/18/'));
-      console.log(wedgeAntillesMovies.length);
-    } catch (parseError) {
-      console.error('Error parsing JSON response:', parseError);
-    }
+    console.error(`Unexpected status code: ${response.statusCode}`);
   }
 });
